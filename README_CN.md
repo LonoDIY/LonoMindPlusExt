@@ -10,11 +10,13 @@
 * 教程 URL ：后续会陆续完善，以视频或者文字的形式。
 
 * 如果您在中国，可以关注我的小红书账号 [yy 超爱玩]   
- 
+
 <img src="./arduinoC/_images/xiaohongshu.png" width="200" height="320" />
 
 ## 概述
-Lono 这个项目主要是因为我想制作一个低成本的教育机器人。得益于参考许多类似开源项目的经验，我最终完成了 Lono 机器人。目前，Lono 是以 Arduino nano 作为主控制器，结合低成本的 SG90 舵机以及其他低成本硬件，如 0.96 英寸 OLED 屏幕、蜂鸣器和 JDY-31 蓝牙模块，这使得 Lono 机器人有更多的玩法。
+Lono 这个项目主要是因为我想制作一个低成本的教育机器人。得益于参考许多类似开源项目的经验，我最终完成了 Lono 机器人。目前，Lono 是以 Arduino nano 作为主控制器，结合低成本的 SG90 舵机以及其他低成本硬件，如 0.96 英寸 OLED 屏幕、蜂鸣器和 JDY-31 蓝牙模块，这使得 Lono 机器人有更多的玩法。   
+
+有的例子需要同时加载lono提供的软件串口扩展，仓库地址为 https://github.com/LonoDIY/LonoSoftwareSerial
 
 ## 模块
 

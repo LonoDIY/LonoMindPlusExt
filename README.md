@@ -19,6 +19,8 @@
 ## Summary
 The Lono project was mainly because I wanted to create a low-cost educational robot. Thanks to referring to the experiences of many similar open-source projects, I finally completed the Lono robot. Currently, Lono is a robot with Arduino nano as the main controller, combined with low-cost SG90 servo motors, and other low-cost hardware, such as 0.96-inch OLED screens, buzzers, and JDY-31 Bluetooth modules, which enables the Lono robot to have more gameplay options.
 
+Some examples need to load the software serial port extension provided by Lono at the same time. The repository address is https://github.com/LonoDIY/LonoSoftwareSerial
+
 ## Blocks
 
 ![](./arduinoC/_images/blocks.png)
