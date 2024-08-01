@@ -1,5 +1,5 @@
 {
-    "LonoRobot.welcomeToLono|block": "欢迎来到LonoDIY，如果遇到问题请关注小红书",
+    "LonoRobot.welcomeToLono|block": "欢迎来到LonoDIY，如果遇到问题请关注小红书yy超爱玩",
     "LonoRobot.startRobot|block": "初始化Lono机器人",
     "LonoRobot.homeRobot|block": "恢复到开始状态",
     "LonoRobot.playEmoji|block": "显示表情 [EMOJI]",
@@ -40,6 +40,12 @@
     "LonoRobot.drawArc|block": "画一条弧线 圆心 x=[X] y=[Y] 半径=[R] 起始角度=[SA] 结束角度=[EA]",
     "LonoRobot.drawLine|block": "画一条直线 起点 x=[X]  y=[Y]  终点 x=[X1]  y=[Y1]",
     "LonoRobot.drawPoint|block": "画一个点 x=[X]  y=[Y]",
+
+    "LonoRobot.tone|block": "设置蜂鸣器频率为 [FREQ] 赫兹, 节拍为 [BEAT]",
+    "LonoRobot.alternatelyTone|block": "交替变换声音 [SOUND1] 和 [SOUND2], 每次发声时长 [VD] 毫秒, 每次静默时长 [SD] 毫秒, 重复次数 [TIMES]",
+    "LonoRobot.progressiveTone|block": "渐变声音, 开始频率=[SOUND1], 结束频率=[SOUND2], 变化倍率=[RATIO], 发声时长=[VD]毫秒, 静默时长=[SD]毫秒",
+
+    "LonoRobot.bluetoothControl|block": "蓝牙控制 命令=[CMD], 序号=[IDX]",
 
     "LonoRobot.EMOJITYPE.SMILE|menu": "微笑",
     "LonoRobot.EMOJITYPE.HAPPY|menu": "高兴",
