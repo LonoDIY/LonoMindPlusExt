@@ -39,10 +39,6 @@ ServoOsc::ServoOsc(int initAngle, uint16_t p, uint8_t a, int8_t o, int8_t ph, in
     // We need to calculate the phase increment wherever the period changes
     calcPhaseInc();
 
-    attach(pn);
-    positionServo(initAngle);
-    detach();
-
     // Attach the servo if needed
     if (atch)
         attach(pn);

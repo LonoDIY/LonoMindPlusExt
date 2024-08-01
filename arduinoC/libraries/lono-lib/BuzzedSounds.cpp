@@ -7,8 +7,34 @@ void Buzzer::init(int pin) {
     buzzerPin = pin;
 }
 
+void Buzzer::playSmile() {
+    bendTone(S_C5, S_E5, 1.04, 10, 10);
+}
+
+void Buzzer::playHappy() {
+    bendTone(2000, 6000, 1.05, 8, 3);
+    bendTone(5999, 2000, 1.05, 13, 2);
+}
+
 void Buzzer::playNaughty() {
     bendTone(1000, 500, 1.04, 100, 10);
+}
+
+void Buzzer::playSurprise() {
+    bendTone(S_A5, S_C6, 1.04, 10, 10);
+}
+
+void Buzzer::playAngry() {
+    bendTone(S_A5, S_C6, 1.04, 10, 10);
+    bendTone(S_A5, S_C6, 1.04, 10, 10);
+}
+
+void Buzzer::playSorry() {
+    bendTone(S_C6, S_A5, 1.02, 20, 200);
+}
+
+void Buzzer::playSad() {
+    bendTone(S_A5, S_E5, 1.02, 20, 200);
 }
 
 void Buzzer::playAlarm() {
@@ -37,14 +63,6 @@ void Buzzer::playConfused() {
     bendTone(1000, 1700, 1.05, 9, 10);
 }
 
-void Buzzer::playHappy() {
-    bendTone(2000, 6000, 1.05, 8, 3);
-    bendTone(5999, 2000, 1.05, 13, 2);
-}
-
-void Buzzer::playSad() {
-    bendTone(S_A5, S_E5, 1.02, 20, 200);
-}
 
 void Buzzer::playCuddly() {
     bendTone(700, 900, 1.03, 16, 4);

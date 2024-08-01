@@ -4,7 +4,7 @@
 
 #define MOTION_LIMIT 4
 
-uint16_t motions[MOTION_LIMIT][SERVO_COUNT+1] = {0};
+// uint16_t motions[MOTION_LIMIT][SERVO_COUNT+1] = {0};
 
 void Lono::init() {
     // Initialize the PWM driver
@@ -44,7 +44,7 @@ void Lono::init() {
     emoji.begin();
     emoji.drawEyes();
 
-    // home();
+    home();
 }
 
 void Lono::home() {
@@ -87,6 +87,7 @@ void Lono::saveTrims() {
     for (int i = 0; i < SERVO_COUNT; i++) {
         EEPROM.write(i, servosTrim[i]);
     }
+    home();
 }
 
 void Lono::resetTrims() {
@@ -95,50 +96,75 @@ void Lono::resetTrims() {
         servos[i].setTrim(0);
     }
     saveTrims();
+    home();
 }
 
 void Lono::playEmoji(EmojiType emojiType) {
-    switch (emojiType) {
-        case EmojiType::SMILE:
-            emoji.drawSmileFace();
-            break;
-        case EmojiType::SAD:
-            emoji.drawSadFace();
-            break;
-        case EmojiType::CRY:
-            emoji.drawCryFace();
-            break;
-        case EmojiType::SORRY:
-            emoji.drawSorryFace();
-            break;
-        case EmojiType::ANGRY:
-            emoji.drawAngryFace();
-            break;
-        case EmojiType::EYES:
-            emoji.drawEyes();
-            break;
-        case EmojiType::LOOKUP:
-            emoji.drawLookUpEyes();
-            break;
-        case EmojiType::LOOKDOWN:
-            emoji.drawLookDownEyes();
-            break;
-        case EmojiType::LOOKLEFT:
-            emoji.drawLeftLookEyes();
-            break;
-        case EmojiType::LOOKRIGHT:
-            emoji.drawRightLookEyes();
-            break;
-        default:
-            emoji.drawEyes();
-            break;
+    switch (emojiType)
+    {
+    case EmojiType::SMILE:
+        emoji.drawSmileFace();
+        break;
+    case EmojiType::HAPPY:
+        emoji.drawHappyFace();
+        break;
+    case EmojiType::NAUGHTY:
+        emoji.drawNaughtyFace();
+        break;
+    case EmojiType::SURPRISE:
+        emoji.drawSurpriseFace();
+        break;
+    case EmojiType::ANGRY:
+        emoji.drawAngryFace();
+        break;
+    case EmojiType::SORRY:
+        emoji.drawSorryFace();
+        break;
+    case EmojiType::SAD:
+        emoji.drawSadFace();
+        break;
+    case EmojiType::EYES:
+        emoji.drawEyes();
+        break;
+    case EmojiType::LOOKUP:
+        emoji.drawLookUpEyes();
+        break;
+    case EmojiType::LOOKDOWN:
+        emoji.drawLookDownEyes();
+        break;
+    case EmojiType::LOOKLEFT:
+        emoji.drawLeftLookEyes();
+        break;
+    case EmojiType::LOOKRIGHT:
+        emoji.drawRightLookEyes();
+        break;
+    default:
+        break;
     }
 }
 
 void Lono::playSound(SoundType sound) {
-    switch (sound) {
+    switch(sound) {
+        case SoundType::SMILE:
+            buzzer.playSmile();
+            break;
+        case SoundType::HAPPY:
+            buzzer.playHappy();
+            break;
         case SoundType::NAUGHTY:
             buzzer.playNaughty();
+            break;
+        case SoundType::SURPRISE:
+            buzzer.playSurprise();
+            break;
+        case SoundType::ANGRY:
+            buzzer.playAngry();
+            break;
+        case SoundType::SORRY:
+            buzzer.playSorry();
+            break;
+        case SoundType::SAD:
+            buzzer.playSad();
             break;
         case SoundType::ALARM:
             buzzer.playAlarm();
@@ -152,44 +178,61 @@ void Lono::playSound(SoundType sound) {
         case SoundType::CONFUSED:
             buzzer.playConfused();
             break;
-        case SoundType::HAPPY:
-            buzzer.playHappy();
-            break;
-        case SoundType::SAD:
-            buzzer.playSad();
-            break;
         case SoundType::CUDDLY:
             buzzer.playCuddly();
             break;
         case SoundType::SLEEPING:
             buzzer.playSleeping();
             break;
+        default:
+            break;
     }
 }
 
-void Lono::addMotion(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5) {
-    if (motionCount >= MOTION_LIMIT) {
-        return;
-    }
-    int motion[SERVO_COUNT+1] = {time, R1, R2, R3, R4, R5, L1, L2, L3, L4, L5};
-    for (int i = 0; i < SERVO_COUNT+1; i++) {
-        motions[motionCount][i] = motion[i];
-    }
-    motionCount++;
-}
-
-void Lono::playMotion(int start, int end) {
-    if (start-1 < 0 || start-1 >= motionCount || end-1 < 0 || end-1 >= motionCount) {
-        return;
-    }
-    for (int i = start-1; i <= end-1; i++) {
-        int time = motions[i][0];
-        int target[SERVO_COUNT];
-        for (int j = 0; j < SERVO_COUNT; j++) {
-            target[j] = motions[i][j+1];
+void Lono::bluetoothControl(String cmd, const int &idx) {
+    if (cmd == "d") {
+        if (idx == 0) {
+            home();
+        } else if (idx == 1) {
+            walk(5, 1000, FORWARD);
+        } else if (idx == 2) {
+            walk(5, 1000, BACKWARD);
+        } else if (idx == 3) {
+            sideWalk(5, 1000, LEFT);
+        } else if (idx == 4) {
+            sideWalk(5, 1000, RIGHT);
         }
-        _moveServos(time, target);
     }
+}
+
+// void Lono::addMotion(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5) {
+//     if (motionCount >= MOTION_LIMIT) {
+//         return;
+//     }
+//     int motion[SERVO_COUNT+1] = {time, R1, R2, R3, R4, R5, L1, L2, L3, L4, L5};
+//     for (int i = 0; i < SERVO_COUNT+1; i++) {
+//         motions[motionCount][i] = motion[i];
+//     }
+//     motionCount++;
+// }
+
+// void Lono::playMotion(int start, int end) {
+//     if (start-1 < 0 || start-1 >= motionCount || end-1 < 0 || end-1 >= motionCount) {
+//         return;
+//     }
+//     for (int i = start-1; i <= end-1; i++) {
+//         int time = motions[i][0];
+//         int target[SERVO_COUNT];
+//         for (int j = 0; j < SERVO_COUNT; j++) {
+//             target[j] = motions[i][j+1];
+//         }
+//         _moveServos(time, target);
+//     }
+// }
+
+void Lono::previewFrame(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5) {
+    int target[SERVO_COUNT] = {R1, R2, R3, R4, R5, L1, L2, L3, L4, L5};
+    _moveServos(time, target);
 }
 
 
@@ -312,7 +355,7 @@ void Lono::_oscillateServos(int A[SERVO_COUNT], int O[SERVO_COUNT], float P[SERV
 }
 
 void Lono::walk(float steps, int T, int dir) {
-    int A[SERVO_COUNT] = {/*right*/30, -1, -1, 20, 30, /*left*/ 30, -1, -1, 20, 30};
+    int A[SERVO_COUNT] = {/*right*/30, -1, -1, 20, 20, /*left*/ 30, -1, -1, 20, 20};
     int O[SERVO_COUNT] = {/*right*/0, 0, 0, 0, 0, /*left*/0, 0, 0, 0, 0};
     float P[SERVO_COUNT] = {/*right*/90, 0, 0, dir * 90, 0, /*left*/90, 0, 0, dir * 90, 0};
 
@@ -324,9 +367,9 @@ void Lono::sideWalk(float steps, int T, int dir) {
     _moveServos(1000, target);
     delay(1000);
 
-    int A[SERVO_COUNT] = {/*right*/-1, -1, -1, -1, 30, /*left*/ -1, -1, -1, -1, 30};
+    int A[SERVO_COUNT] = {/*right*/-1, -1, -1, -1, 20, /*left*/ -1, -1, -1, -1, 20};
     int O[SERVO_COUNT] = {/*right*/0, 0, 0, 0, 0, /*left*/0, 0, 0, 0, 0};
-    float P[SERVO_COUNT] = {/*right*/0, 0, 0, dir * 90, 0, /*left*/0, 0, 0, dir * 90, 0};
+    float P[SERVO_COUNT] = {/*right*/0, 0, 0, dir * 90, 0, /*left*/0, 0, 0, -1 * dir * 90, 0};
 
     _oscillateServos(A, O, P, T, steps);
 }

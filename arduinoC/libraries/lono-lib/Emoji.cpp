@@ -49,49 +49,83 @@ void Emoji::drawSmileFace() {
     } while (u8g2.nextPage());
 }
 
-void Emoji::drawSadFace() {
-    u8g2.clearBuffer();
-    u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    drawArc(central_x, central_y + 30, 20, 225, 315);
-    u8g2.sendBuffer();
+
+void Emoji::drawHappyFace() {
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        // u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        // u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        drawArc(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, 180, 360);
+        drawArc(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, 180, 360);
+        u8g2.drawLine(central_x - 10, central_y + 7, central_x + 10, central_y + 7);
+        drawArc(central_x, central_y + 7, 10, 0, 180);
+    } while (u8g2.nextPage());
 }
 
-void Emoji::drawCryFace() {
-    u8g2.clearBuffer();
-    u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    // draw teardrop
-    u8g2.drawCircle(central_x - emoji_radius / 3 - 5, central_y - emoji_radius / 3 + 12, emoji_radius / 15, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x - emoji_radius / 3 - 10, central_y - emoji_radius / 3 + 25, emoji_radius / 20, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3 + 5, central_y - emoji_radius / 3 + 12, emoji_radius / 15, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3 + 10, central_y - emoji_radius / 3 + 25, emoji_radius / 20, U8G2_DRAW_ALL);
-    drawArc(central_x, central_y + 30, 20, 225, 315);
-    u8g2.sendBuffer();
+void Emoji::drawNaughtyFace() {
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        
+        u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        
+        drawArc(central_x, central_y + emoji_radius / 4, emoji_radius / 4, 200, 340); // 上弧
+        drawArc(central_x, central_y + emoji_radius / 4, emoji_radius / 4, 20, 160);  // 下弧
+
+        u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 12, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 12, U8G2_DRAW_ALL);
+    } while (u8g2.nextPage());
 }
 
-void Emoji::drawSorryFace() {
-    u8g2.clearBuffer();
-    u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x - emoji_radius / 3 + 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    drawArc(central_x - emoji_radius / 3 - 7, central_y - emoji_radius / 3 - 22, 15, 45, 90);
-    drawArc(central_x + emoji_radius / 3 + 7, central_y - emoji_radius / 3 - 22, 15, 90, 135);
-    u8g2.drawHLine(central_x - 5, central_y + 15, 10);
-    u8g2.sendBuffer();
+void Emoji::drawSurpriseFace() {
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        
+        u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 4, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 4, U8G2_DRAW_ALL);
+        
+        u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 8, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 8, U8G2_DRAW_ALL);
+        
+        u8g2.drawCircle(central_x, central_y + emoji_radius / 3, emoji_radius / 8, U8G2_DRAW_ALL);
+    } while (u8g2.nextPage());
 }
 
 void Emoji::drawAngryFace() {
-    u8g2.clearBuffer();
-    u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x - emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    u8g2.drawCircle(central_x + emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
-    drawArc(central_x - emoji_radius / 3 - 10, central_y - emoji_radius / 3 - 22, 15, 45, 90);
-    drawArc(central_x + emoji_radius / 3 + 4, central_y - emoji_radius / 3 - 22, 15, 90, 135);
-    drawArc(central_x, central_y + 25, 20, 245, 315);
-    u8g2.sendBuffer();
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x - emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        drawArc(central_x - emoji_radius / 3 - 10, central_y - emoji_radius / 3 - 22, 15, 45, 90);
+        drawArc(central_x + emoji_radius / 3 + 4, central_y - emoji_radius / 3 - 22, 15, 90, 135);
+        drawArc(central_x, central_y + 25, 20, 245, 315);
+    } while (u8g2.nextPage());
+}
+
+void Emoji::drawSorryFace() {
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x - emoji_radius / 3 + 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3 - 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        drawArc(central_x - emoji_radius / 3 - 7, central_y - emoji_radius / 3 - 22, 15, 45, 90);
+        drawArc(central_x + emoji_radius / 3 + 7, central_y - emoji_radius / 3 - 22, 15, 90, 135);
+        u8g2.drawHLine(central_x - 5, central_y + 15, 10);
+    } while (u8g2.nextPage());
+}
+
+void Emoji::drawSadFace() {
+    u8g2.firstPage();
+    do {
+        u8g2.drawCircle(central_x, central_y, emoji_radius, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x - emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        u8g2.drawCircle(central_x + emoji_radius / 3, central_y - emoji_radius / 3, emoji_radius / 6, U8G2_DRAW_ALL);
+        drawArc(central_x, central_y + 30, 20, 225, 315);
+    } while (u8g2.nextPage());
 }
 
 void Emoji::drawEyes() {

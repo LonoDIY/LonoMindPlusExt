@@ -12,7 +12,6 @@
 
 class Emoji {
     private:
-        U8G2_SSD1306_128X64_NONAME_1_HW_I2C u8g2;
         int central_x;
         int central_y;
         int left_eye_x;
@@ -23,15 +22,20 @@ class Emoji {
         int eye_small_radius;
         int emoji_radius;
     public:
+        U8G2_SSD1306_128X64_NONAME_1_HW_I2C u8g2;
         Emoji();
         void begin();
         void displayText(const char* text, int x, int y);
         void drawArc(int x, int y, int r, int start_angle, int end_angle);
+
         void drawSmileFace();
-        void drawSadFace();
-        void drawCryFace();
-        void drawSorryFace();
+        void drawHappyFace();
+        void drawNaughtyFace();
+        void drawSurpriseFace();
         void drawAngryFace();
+        void drawSorryFace();
+        void drawSadFace();
+        
 
         // eyes
         void drawEyes();

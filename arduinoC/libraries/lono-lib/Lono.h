@@ -67,10 +67,12 @@ L5      /  9          /  Left Foot
 
 enum class EmojiType {
     SMILE,
-    SAD,
-    CRY,
-    SORRY,
+    HAPPY,
+    NAUGHTY,
+    SURPRISE,
     ANGRY,
+    SORRY,
+    SAD,
 
     EYES,
     LOOKUP,
@@ -79,14 +81,20 @@ enum class EmojiType {
     LOOKRIGHT
 };
 
+
 enum class SoundType {
+    SMILE,
+    HAPPY,
     NAUGHTY,
+    SURPRISE,
+    ANGRY,
+    SORRY,
+    SAD,
+
     ALARM,
     CONNECT,
     DISCONNECT,
     CONFUSED,
-    HAPPY,
-    SAD,
     CUDDLY,
     SLEEPING
 };
@@ -114,22 +122,22 @@ class Lono {
 
         bool rest = false;
 
-        uint8_t motionCount = 0;
+        // uint8_t motionCount = 0;
 
-        // int servo_target[SERVO_COUNT+1] = {90, 0, 90, 90, 90, 90, 180, 90, 90, 90};
-
-        Emoji emoji;
-        Buzzer buzzer;
 
         void _moveServos(int time, const int target[]);
         void _moveSingleServo(int time, int target, int servoIndex);
         void _oscillateServos(int A[SERVO_COUNT], int O[SERVO_COUNT], float P[SERVO_COUNT], int T, float cycle);
 
     public:
+        Emoji emoji;
+        Buzzer buzzer;
+        
         void init();
 
         void attachServos();
         void detachServos();
+
 
         void setServoTrim(int servoIdx, int trim);
         void saveTrims();
@@ -137,40 +145,41 @@ class Lono {
         uint8_t getTrim(int servoIdx) {
             return servosTrim[servoIdx];
         }
+        void bluetoothControl(String cmd, const int &idx);
 
-        // void resetServoTarget() {
-        //     for (int i = 0; i < SERVO_COUNT; i++) {
-        //         servo_target[i] = 90;
-        //     }
-        //     servo_target[1] = 0;
-        //     servo_target[6] = 180;
+
+        // void testServos() {
+        //     attachServos();
+        //     servos[6].positionServo(0);
+        //     delay(2000);
+        //     servos[6].positionServo(90);
+        //     delay(2000);
+        //     servos[6].positionServo(180);
+        //     delay(2000);
         // }
-
-        void testServos() {
-            attachServos();
-            servos[6].positionServo(0);
-            delay(2000);
-            servos[6].positionServo(90);
-            delay(2000);
-            servos[6].positionServo(180);
-            delay(2000);
-        }
         
         void displayText(const char* text, int x, int y) {
             emoji.displayText(text, x, y);
         }
         void playEmoji(EmojiType emojiType);
         void playSound(SoundType sound);
+        void drawLine();
+        void drawCircle();
+        
 
         void moveJoint(JointType joint, int angle, int T) {
             _moveSingleServo(T, angle, int(joint));
         }
-
-        void addMotion(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5);
-        void playMotion(int start, int end);
-        void cleanMotion() {
-            motionCount = 0;
+        void moveJointByIdx(int idx, int angle) {
+            _moveSingleServo(500, angle, idx);
         }
+
+        // void addMotion(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5);
+        // void playMotion(int start, int end);
+        // void cleanMotion() {
+        //     motionCount = 0;
+        // }
+        void previewFrame(int time, uint8_t R1, uint8_t R2, uint8_t R3, uint8_t R4, uint8_t R5, uint8_t L1, uint8_t L2, uint8_t L3, uint8_t L4, uint8_t L5);
 
         void home();
 

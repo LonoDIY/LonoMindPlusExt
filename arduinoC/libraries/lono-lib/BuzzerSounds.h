@@ -98,13 +98,18 @@ class Buzzer {
         void bendTone(float initFreq, float finalFreq, float rate, int noteDuration, int silentDuration);
         void alternateTone(float freq1, float freq2, int duration, int silentDuration, int times);
 
+        void playSmile();
+        void playHappy();
         void playNaughty();
+        void playSurprise();
+        void playAngry();
+        void playSorry();
+        void playSad();
+
         void playAlarm();
         void playConnect();
         void playDisconnect();
         void playConfused();
-        void playHappy();
-        void playSad();
         void playCuddly();
         void playSleeping();
     private:
