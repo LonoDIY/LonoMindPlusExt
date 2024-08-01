@@ -21,7 +21,7 @@ The Lono project was mainly because I wanted to create a low-cost educational ro
 
 Some examples need to load the software serial port extension provided by Lono at the same time. The repository address is https://github.com/LonoDIY/LonoSoftwareSerial   
 
-Example code reference to repository https://github.com/LonoDIY/LonoCode
+Example code and STL model files reference to repository https://github.com/LonoDIY/LonoCode
 
 ## Blocks
 

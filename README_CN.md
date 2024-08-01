@@ -18,7 +18,7 @@ Lono 这个项目主要是因为我想制作一个低成本的教育机器人。
 
 有的例子需要同时加载lono提供的软件串口扩展，仓库地址为 https://github.com/LonoDIY/LonoSoftwareSerial   
 
-相关例子请参考仓库 https://github.com/LonoDIY/LonoCode
+相关例子及模型文件请参考仓库 https://github.com/LonoDIY/LonoCode
 
 ## 模块
 
